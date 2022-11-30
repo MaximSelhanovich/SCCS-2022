@@ -1,14 +1,29 @@
-﻿<div class="dropdown ml-4 nav-color">
-    <div class="btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img src="images/avatar.jpg" width="30" alt="User" class="rounded" />
-    </div>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item-text">
+﻿@using Microsoft.AspNetCore.Identity
+@using WEB_053502_Selhanovich.Entities
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="dropdown ml-4 nav-color">
+    @if (SignInManager.IsSignedIn(User)) {
+        @await Component.InvokeAsync("Cart")
+        <div class="btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="images/avatar.jpg" width="30" alt="User" class="rounded" />
+        </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
             <img src="images/avatar.jpg" width="50" alt="User" class="rounded" />
-            user@mail.ru
+            @User.Identity.Name
         </div>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" asp-area="Product" asp-action="UserProducts">Мои товары</a>
         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
     </div>
+    } else {
+        <div class="nav-item">
+            <a class="nav-link navbar-text" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link navbar-text" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    }
 </div>

@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Log out";
 }
-
-<header>
+<!--asp-route-returnUrl ="@Url.Page("/", new { area = "" })" method="post" -->
+<!--asp-route-returnurl="@ViewContext.HttpContext.Request.Path" -->
+<body>
     <h1>@ViewData["Title"]</h1>
     @{
         if (User.Identity.IsAuthenticated)
@@ -18,4 +19,4 @@
             <p>You have successfully logged out of the application.</p>
         }
     }
-</header>
+</body>

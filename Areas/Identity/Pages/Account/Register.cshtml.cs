@@ -98,6 +98,9 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Avatar")]
+            public IFormFile Image { get; set; }
         }
 
 
@@ -115,8 +118,19 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                if (Input.Image != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(Input.Image.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)Input.Image.Length);
+                    }
+                    user.Image = imageData;
+                }
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                //
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

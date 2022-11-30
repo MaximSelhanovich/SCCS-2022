@@ -7,7 +7,7 @@ namespace WEB_053502_Selhanovich.Entities
             AllowMultiple = false)]
     public sealed class ImageAttribute : DataTypeAttribute
     {
-        private const int ImageMinimumBytes = 2097152;
+        private const int ImageMinimumBytes = 512;
         public ImageAttribute()
             : base(DataType.Upload)
         {

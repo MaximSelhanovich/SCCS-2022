@@ -121,16 +121,12 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
 
                 if (Input.Image != null)
                 {
-                    /*byte[] imageData = null;
+                    byte[] imageData = null;
                     using (var binaryReader = new BinaryReader(Input.Image.OpenReadStream()))
                     {
                         imageData = binaryReader.ReadBytes((int)Input.Image.Length);
                     }
-                    user.Image = imageData;*/
-
-                    await Input.Image
-                        .OpenReadStream()
-                        .ReadAsync(user.Image, 0, (int)Input.Image.Length);
+                    user.Image = imageData;
                 }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

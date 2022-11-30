@@ -3,21 +3,23 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 
-<div class="dropdown ml-4 nav-color">
+<div class="ms-auto" style="display: flex; margin-right: 15%">
     @if (SignInManager.IsSignedIn(User)) {
         @await Component.InvokeAsync("Cart")
-        <div class="btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="@Url.Action("GetImage", "Image")" width="30" alt="User" class="rounded" />
+        <div class="dropdown nav-item nav-color">
+            <div class="btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="@Url.Action("GetImage", "Image")" width="30" alt="User" class="rounded" />
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item-text">
+                    <img src="@Url.Action("GetImage", "Image")" width="50" alt="User" class="rounded" />
+                    @User.Identity.Name
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-area="Product" asp-action="UserProducts">Мои товары</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
+            </div>
         </div>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-item-text">
-                <img src="@Url.Action("GetImage", "Image")" width="50" alt="User" class="rounded" />
-            @User.Identity.Name
-        </div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" asp-area="Product" asp-action="UserProducts">Мои товары</a>
-        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
-    </div>
     } else {
         <div class="nav-item">
             <a class="nav-link navbar-text" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>

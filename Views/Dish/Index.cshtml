@@ -1,26 +1,40 @@
 ﻿@model IEnumerable<WEB_053502_Selhanovich.Entities.Dish>
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Меню";
+    var categories = ViewData["Categories"] as IEnumerable<DishCategory>;
+    int currentGroup = (int)ViewData["CurrentCategory"];
+    var text = currentGroup != 0
+    ? categories
+    .FirstOrDefault(category => category.Id == currentGroup)?
+    .Name
+    : "Все категории";
 }
-
-<h1>View</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-       
-    </thead>
-    <tbody>
-        <div class="row">
-            <div class="card-deck col ">
-                @foreach (var item in Model)
+<div class="container">
+    <div class="col-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                @text
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <a asp-controller="Dish" asp-action="Index" class="dropdown-item" asp-route-category="0">Все категории</a>
+                @foreach (var item in categories)
                 {
-                    <partial name="_ListItemPartial" model="@item" />
+                    <a asp-controller="Dish" asp-action="Index" class="dropdown-item" asp-route-category="@item.Id">@item.Name</a>
                 }
-            </div>
+            </ul>
         </div>
-    </tbody>
-</table>
+    </div>
+    <div class="col-10">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <partial name="_ListItemPartial" model="@item" />
+            }
+        </div>
+    </div>
+</div>

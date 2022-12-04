@@ -6,16 +6,19 @@ namespace WEB_053502_Selhanovich.Controllers
 {
     public class DishController : Controller
     {
-        public List<Dish> Dishes { get; set; } 
+        private List<Dish> Dishes { get; set; } 
 
-        public List<DishCategory> Categories { get; set; }
+        private List<DishCategory> Categories { get; set; }
         private int _pageSize = 3;
 
-        public IActionResult Index(int? group = 0, int pageNumber = 1)
+        public IActionResult Index(int? category = 0, int pageNumber = 1)
         {
-            if (group == 0) group = null;
+            ViewData["Categories"] = Categories;
+            ViewData["CurrentCategory"] = category ?? 0;
+
+            if (category == 0) category = null;
             var items = ListViewModel<Dish>.GetModel(Dishes.AsQueryable(), pageNumber, _pageSize, 
-                                                    dish => !group.HasValue || dish.Id == group.Value);
+                                                    dish => !category.HasValue || dish.CategoryId == category.Value);
             return View(items);
         }
 
@@ -23,7 +26,6 @@ namespace WEB_053502_Selhanovich.Controllers
         {
             FillLists();
         }
-
 
         public void FillLists()
         { 
@@ -37,16 +39,16 @@ namespace WEB_053502_Selhanovich.Controllers
                 new Dish { Id = 1, Name = "Цезарь", Description = "Пал под ножом",
                     CategoryId = 1, Price = 10.56m,
                     ImageName = "Салат Цезарь", MimeType = "jpg" },
-                new Dish { Id = 1, Name = "Греческий", Description = "Хорош с вином",
+                new Dish { Id = 2, Name = "Греческий", Description = "Хорош с вином",
                     CategoryId = 1, Price = 8.0m,
                     ImageName = "Салат Греческий", MimeType = "jpg" },
-                new Dish { Id = 1, Name = "Оливье", Description = "Рецепт неизвестен",
+                new Dish { Id = 3, Name = "Оливье", Description = "Рецепт неизвестен",
                     CategoryId = 1, Price = 9.6m,
                     ImageName = "Салат Оливье", MimeType = "jpg" },
-                new Dish { Id = 1, Name = "Борщ", Description = "А где вы берете красную воду?",
+                new Dish { Id = 4, Name = "Борщ", Description = "А где вы берете красную воду?",
                     CategoryId = 2, Price = 13.33m,
                     ImageName = "Суп Борщ", MimeType = "jpg" },
-                new Dish { Id = 1, Name = "Луковый", Description = "Только не плачь",
+                new Dish { Id = 5, Name = "Луковый", Description = "Только не плачь",
                     CategoryId = 2, Price = 16.19m,
                     ImageName = "Суп Луковый", MimeType = "jpg" },
 

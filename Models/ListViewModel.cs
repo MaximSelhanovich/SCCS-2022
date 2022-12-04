@@ -1,0 +1,32 @@
+﻿using System.Linq.Expressions;
+using WEB_053502_Selhanovich.Entities;
+
+namespace WEB_053502_Selhanovich.Models
+{
+    public class ListViewModel<T>: List<T>
+    {
+        private static int _currentPageNumber;
+        private static int _totalNumberOfPages;
+        private static IQueryable<T> _currentItems;
+
+        private ListViewModel(IQueryable<T> list)
+            :base(list)
+        {
+            
+        }
+
+        public static ListViewModel<T> GetModel(IQueryable<T> list, 
+                                                int current, int itemsPerPage, 
+                                                Expression<Func<T, bool>> filter)
+        {
+            _currentPageNumber = current;
+            _totalNumberOfPages = (int)Math.Ceiling(list.Count() / 3.0);
+            var items = list
+                        .Where(filter)
+                        .Skip((current - 1) * itemsPerPage)
+                        .Take(itemsPerPage);
+            _currentItems = items;
+            return new ListViewModel<T>(items);
+        }
+    }
+}

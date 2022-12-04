@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WEB_053502_Selhanovich.Entities.Dish>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+       
+    </thead>
+    <tbody>
+        <div class="row">
+            <div class="card-deck col ">
+                @foreach (var item in Model)
+                {
+                    <partial name="_ListItemPartial" model="@item" />
+                }
+            </div>
+        </div>
+    </tbody>
+</table>

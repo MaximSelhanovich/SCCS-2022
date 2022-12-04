@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace WEB_053502_Selhanovich.Entities
+namespace WEB_053502_Selhanovich.Attributes
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
             AllowMultiple = false)]

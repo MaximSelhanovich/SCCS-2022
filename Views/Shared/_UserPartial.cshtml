@@ -8,11 +8,11 @@
         @await Component.InvokeAsync("Cart")
         <div class="dropdown nav-item nav-color">
             <div class="btn dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="@Url.Action("GetImage", "Image")" width="30" alt="User" class="rounded" />
+                <img img-action="GetImage" img-controller="Image" width="30" alt="User" class="rounded" />
             </div>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div class="dropdown-item-text">
-                    <img src="@Url.Action("GetImage", "Image")" width="50" alt="User" class="rounded" />
+                    <img img-action="GetImage" img-controller="Image" width="50" alt="User" class="rounded" />
                     @User.Identity.Name
                 </div>
                 <div class="dropdown-divider"></div>

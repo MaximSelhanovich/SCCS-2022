@@ -6,21 +6,18 @@ namespace WEB_053502_Selhanovich.TagHelpers
     public class PagerTagHelper: TagHelper
     {
         LinkGenerator _linkGenerator;
-        // номер текущей страницы
         public int PageCurrent { get; set; }
-        // общее количество страниц
         public int PageTotal { get; set; }
-        // дополнительный css класс пейджера
         public string PagerClass { get; set; }
-        // имя action
         public string Action { get; set; }
-        // имя контроллера
         public string Controller { get; set; }
         public int? GroupId { get; set; }
+
         public PagerTagHelper(LinkGenerator linkGenerator)
         {
             _linkGenerator = linkGenerator;
         }
+
         public override void Process(TagHelperContext context,
         TagHelperOutput output)
 
@@ -59,6 +56,7 @@ namespace WEB_053502_Selhanovich.TagHelpers
             // добавить пейджер в контейнер
             output.Content.AppendHtml(ulTag);
         }
+
         /// <summary>
         /// Генерирует разметку одной кнопки пейджера
         /// </summary>

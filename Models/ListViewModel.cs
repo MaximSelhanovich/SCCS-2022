@@ -9,6 +9,9 @@ namespace WEB_053502_Selhanovich.Models
         private static int _totalNumberOfPages;
         private static IQueryable<T> _currentItems;
 
+        public int CurrentPageNumber { get { return _currentPageNumber; } }
+        public int TotalNumberOfPages { get { return _totalNumberOfPages; } }
+
         private ListViewModel(IQueryable<T> list)
             :base(list)
         {

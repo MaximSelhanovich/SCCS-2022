@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Меню";
     var categories = ViewData["Categories"] as IEnumerable<DishCategory>;
-    int currentGroup = (int)ViewData["CurrentCategory"];
-    var text = currentGroup != 0
+    int currentCategory = (int)ViewData["CurrentCategory"];
+    var text = currentCategory != 0
     ? categories
-    .FirstOrDefault(category => category.Id == currentGroup)?
+    .FirstOrDefault(category => category.Id == currentCategory)?
     .Name
     : "Все категории";
 }
@@ -37,4 +37,9 @@
             }
         </div>
     </div>
+    <pager page-current="@(((ListViewModel<Dish>)Model).CurrentPageNumber)"
+           page-total="@(((ListViewModel<Dish>)Model).TotalNumberOfPages)"
+           action="Index"
+           controller="Dish"
+           group-id="@currentCategory"></pager>
 </div>

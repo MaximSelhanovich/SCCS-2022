@@ -12,7 +12,7 @@ namespace WEB_053502_Selhanovich.Controllers
         private List<DishCategory> Categories { get; set; }
         private int _pageSize = 3;
 
-        public IActionResult Index(int? category = 0, int pageNumber = 1)
+        public IActionResult Index(int pageNumber = 1, int? category = 0)
         {
             ViewData["Categories"] = Categories;
             ViewData["CurrentCategory"] = category ?? 0;
@@ -47,6 +47,9 @@ namespace WEB_053502_Selhanovich.Controllers
                 new Dish { Id = 2, Name = "Греческий", Description = "Хорош с вином",
                     CategoryId = 1, Price = 8.0m,
                     ImageName = "Салат Греческий", MimeType = "jpg" },
+                new Dish { Id = 3, Name = "Оливье", Description = "Рецепт неизвестен",
+                    CategoryId = 1, Price = 9.6m,
+                    ImageName = "Салат Оливье", MimeType = "jpg" },
                 new Dish { Id = 3, Name = "Оливье", Description = "Рецепт неизвестен",
                     CategoryId = 1, Price = 9.6m,
                     ImageName = "Салат Оливье", MimeType = "jpg" },

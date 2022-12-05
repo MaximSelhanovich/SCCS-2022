@@ -25,8 +25,12 @@ namespace WEB_053502_Selhanovich.Models
             _currentPageNumber = current;
             _totalNumberOfPages = (int)Math.Ceiling(list.Count() / 3.0);
             var items = list
-                        .Where(filter)
-                        .Skip((current - 1) * itemsPerPage)
+                        .Where(filter);
+            if (current <= 1)
+            {
+                _totalNumberOfPages = (int)Math.Ceiling(items.Count() / 3.0);
+            }
+            items = items.Skip((current - 1) * itemsPerPage)
                         .Take(itemsPerPage);
             _currentItems = items;
             return new ListViewModel<T>(items);

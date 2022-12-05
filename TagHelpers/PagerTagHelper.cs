@@ -36,10 +36,10 @@ namespace WEB_053502_Selhanovich.TagHelpers
 
                 new
                 {
-                    categoryId = GroupId == 0
+                    pageNumber = i,
+                    category = GroupId == 0
                 ? null
-                : GroupId,
-                    pageNumber = i
+                : GroupId
                 });
 
                 // получение разметки одной кнопки пейджера
@@ -47,8 +47,8 @@ namespace WEB_053502_Selhanovich.TagHelpers
 
                 url: url,
                 text: i.ToString(),
-                active: i == PageCurrent,
-                disabled: i == PageCurrent
+                active: i == PageCurrent
+                //disabled: i == PageCurrent
                 );
                 // добавить кнопку в разметку пейджера
                 ulTag.InnerHtml.AppendHtml(item);
@@ -63,11 +63,9 @@ namespace WEB_053502_Selhanovich.TagHelpers
         /// <param name="url">адрес</param>
         /// <param name="text">текст кнопки пейджера</param>
         /// <param name="active">признак текущей страницы</param>
-        /// <param name="disabled">запретить доступ к кнопке</param>
         /// <returns>объект класса TagBuilder</returns>
         private TagBuilder GetPagerItem(string url, string text,
-        bool active = false,
-        bool disabled = false)
+        bool active = false)
 
         {
             // создать тэг <li>

@@ -29,17 +29,5 @@
             </ul>
         </div>
     </div>
-    <div class="col-10">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <partial name="_ListItemPartial" model="@item" />
-            }
-        </div>
-    </div>
-    <pager page-current="@(((ListViewModel<Dish>)Model).CurrentPageNumber)"
-           page-total="@(((ListViewModel<Dish>)Model).TotalNumberOfPages)"
-           action="Index"
-           controller="Dish"
-           group-id="@currentCategory"></pager>
+    <partial name="_ListPartial" model="@Model" />
 </div>

@@ -1,0 +1,23 @@
+﻿@{
+    var categories = ViewData["Categories"] as IEnumerable<DishCategory>;
+    int currentCategory = (int)ViewData["CurrentCategory"];
+    var text = currentCategory != 0
+    ? categories
+    .FirstOrDefault(category => category.Id == currentCategory)?
+    .Name
+    : "Все категории";
+}
+<div class="col-10">
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <partial name="_ListItemPartial" model="@item" />
+        }
+    </div>
+</div>
+<pager page-current="@(((ListViewModel<Dish>)Model).CurrentPageNumber)"
+       page-total="@(((ListViewModel<Dish>)Model).TotalNumberOfPages)"
+       action="Index"
+       controller="Dish"
+       group-id="@currentCategory"></pager>

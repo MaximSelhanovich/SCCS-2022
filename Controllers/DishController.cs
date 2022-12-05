@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WEB_053502_Selhanovich.Entities;
+using WEB_053502_Selhanovich.Extensions;
 using WEB_053502_Selhanovich.Models;
 
 namespace WEB_053502_Selhanovich.Controllers
@@ -19,7 +20,11 @@ namespace WEB_053502_Selhanovich.Controllers
             if (category == 0) category = null;
             var items = ListViewModel<Dish>.GetModel(Dishes.AsQueryable(), pageNumber, _pageSize, 
                                                     dish => !category.HasValue || dish.CategoryId == category.Value);
-            return View(items);
+            
+            if (Request.IsAjaxRequest())
+                return PartialView("_listpartial", items);
+            else
+                return View(items);
         }
 
         public DishController()

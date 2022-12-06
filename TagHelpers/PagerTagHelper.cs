@@ -11,7 +11,7 @@ namespace WEB_053502_Selhanovich.TagHelpers
         public string PagerClass { get; set; }
         public string Action { get; set; }
         public string Controller { get; set; }
-        public int? GroupId { get; set; }
+        public int? CategoryId { get; set; }
 
         public PagerTagHelper(LinkGenerator linkGenerator)
         {
@@ -37,9 +37,9 @@ namespace WEB_053502_Selhanovich.TagHelpers
                 new
                 {
                     pageNumber = i,
-                    category = GroupId == 0
+                    category = CategoryId == 0
                 ? null
-                : GroupId
+                : CategoryId
                 });
 
                 // получение разметки одной кнопки пейджера

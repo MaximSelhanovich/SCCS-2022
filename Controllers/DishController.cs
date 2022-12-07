@@ -6,7 +6,7 @@ using WEB_053502_Selhanovich.Models;
 
 namespace WEB_053502_Selhanovich.Controllers
 {
-    [Route("Catalog")]
+    //[Route("Catalog")]
     public class DishController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -15,8 +15,8 @@ namespace WEB_053502_Selhanovich.Controllers
         private List<DishCategory> DishCategories { get; set; }
         private readonly int _pageSize = 3;
 
-        [Route("Page")]
-        [Route("Page_{pageNumber:int}")]
+        [Route("Catalog")]
+        [Route("Catalog/Page_{pageNumber:int}")]
         public IActionResult Index(int pageNumber = 1, int? category = 0)
         {
             ViewData["DishCategories"] = DishCategories;

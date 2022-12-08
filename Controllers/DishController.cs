@@ -6,7 +6,6 @@ using WEB_053502_Selhanovich.Models;
 
 namespace WEB_053502_Selhanovich.Controllers
 {
-    //[Route("Catalog")]
     public class DishController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;

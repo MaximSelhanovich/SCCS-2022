@@ -1,0 +1,56 @@
+﻿@page
+@model WEB_053502_Selhanovich.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn border border-info rounded-pill" asp-page="Create">
+        <img src="~/images/button.png" width="30" height="30" />
+        Create new
+    </a>
+</p>    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].CategoryId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Dish) {
+        <tr>
+            <td>
+                <img src="~/images/@(item.ImageName + '.' + item.MimeType)" width="70" height="50"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Model.DishCategory.FirstOrDefault(category => category.Id == item.CategoryId).Name
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">
+                        <img src="~/images/edit.png" width="25" height="25" />
+                </a>
+                <a asp-page="./Details" asp-route-id="@item.Id">
+                        <img src="~/images/info.png" width="25" height="25"/>
+                </a>
+                <a asp-page="./Delete" asp-route-id="@item.Id">
+                        <img src="~/images/delete.png" width="25" height="25"/>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

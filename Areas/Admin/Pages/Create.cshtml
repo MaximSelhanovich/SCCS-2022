@@ -11,8 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <img id="output" width="350" height="250"/>
             <div class="form-group">
                 <label asp-for="Dish.Name" class="control-label"></label>
                 <input asp-for="Dish.Name" class="form-control" />
@@ -33,15 +34,9 @@
                 <input asp-for="Dish.Price" class="form-control" />
                 <span asp-validation-for="Dish.Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Dish.ImageName" class="control-label"></label>
-                <input asp-for="Dish.ImageName" class="form-control" />
-                <span asp-validation-for="Dish.ImageName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dish.MimeType" class="control-label"></label>
-                <input asp-for="Dish.MimeType" class="form-control" />
-                <span asp-validation-for="Dish.MimeType" class="text-danger"></span>
+            
+            <div class="custom-file">
+                <input asp-for="FormFile" type="file" class="custom-file-input" onchange="loadFile(event)">
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -51,6 +46,23 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">
+        <img src="~/images/left-arrow.png" width="30" height="30" />
+    </a>
 </div>
 
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        });
+    </script>
+
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+}

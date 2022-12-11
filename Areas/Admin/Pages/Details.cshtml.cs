@@ -20,6 +20,7 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
         }
 
       public Dish Dish { get; set; }
+        public DishCategory DishCategory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +37,7 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
             else 
             {
                 Dish = dish;
+                DishCategory = await _context.DishCategories.FirstOrDefaultAsync(c => dish.CategoryId == c.Id);
             }
             return Page();
         }

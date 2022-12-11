@@ -14,15 +14,19 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
     public class EditModel : PageModel
     {
         private readonly WEB_053502_Selhanovich.Data.ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public EditModel(WEB_053502_Selhanovich.Data.ApplicationDbContext context)
+        public EditModel(IWebHostEnvironment environment, WEB_053502_Selhanovich.Data.ApplicationDbContext context)
         {
             _context = context;
+            _environment = environment;
         }
 
         [BindProperty]
         public Dish Dish { get; set; } = default!;
-
+        public DishCategory DishCategory { get; set; }
+        [BindProperty]
+        public IFormFile FormFile { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Dishes == null)
@@ -36,6 +40,8 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
                 return NotFound();
             }
             Dish = dish;
+            DishCategory = await _context.DishCategories.FirstOrDefaultAsync(c => dish.CategoryId == c.Id);
+
             return Page();
         }
 
@@ -46,6 +52,16 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+            if (FormFile != null)
+            {
+                string extension = Path.GetExtension(FormFile.FileName).Replace(".", string.Empty); ;
+                Dish.MimeType = extension;
+                string filePath = Path.Combine(_environment.WebRootPath, "images", Dish.ImageName + '.' + Dish.MimeType);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await FormFile.CopyToAsync(fileStream);
+                }
             }
 
             _context.Attach(Dish).State = EntityState.Modified;

@@ -13,6 +13,7 @@ namespace WEB_053502_Selhanovich.Data
                 new DishCategory { Name = "Салат" },
                 new DishCategory { Name = "Суп" }
                 );
+
             applicationDbContext.Dishes.AddRange(
                 new Dish
                 {
@@ -20,7 +21,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "Пал под ножом",
                     CategoryId = 1,
                     Price = 10.56m,
-                    ImageName = "Салат Цезарь",
+                    ImageName = "1",
                     MimeType = "jpg"
                 },
                 new Dish
@@ -29,7 +30,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "Хорош с вином",
                     CategoryId = 1,
                     Price = 8.0m,
-                    ImageName = "Салат Греческий",
+                    ImageName = "2",
                     MimeType = "jpg"
                 },
                 new Dish
@@ -38,7 +39,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "Рецепт неизвестен",
                     CategoryId = 1,
                     Price = 9.6m,
-                    ImageName = "Салат Оливье",
+                    ImageName = "3",
                     MimeType = "jpg"
                 },
                 new Dish
@@ -47,7 +48,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "Рыбов есть?",
                     CategoryId = 1,
                     Price = 9.6m,
-                    ImageName = "Салат Мимоза",
+                    ImageName = "4",
                     MimeType = "jpg"
                 },
                 new Dish
@@ -56,7 +57,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "А где вы берете красную воду?",
                     CategoryId = 2,
                     Price = 13.33m,
-                    ImageName = "Суп Борщ",
+                    ImageName = "5",
                     MimeType = "jpg"
                 },
                 new Dish
@@ -65,7 +66,7 @@ namespace WEB_053502_Selhanovich.Data
                     Description = "Только не плачь",
                     CategoryId = 2,
                     Price = 16.19m,
-                    ImageName = "Суп Луковый",
+                    ImageName = "6",
                     MimeType = "jpg"
                 });
             applicationDbContext.SaveChanges();

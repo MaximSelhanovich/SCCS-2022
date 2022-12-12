@@ -15,7 +15,6 @@ namespace WEB_053502_Selhanovich.Extensions
         public async Task InvokeAsync(HttpContext context, ILoggerFactory loggerFactory)
         {
             var logger = loggerFactory.CreateLogger("BadRequest");
-            context.Response.StatusCode = 201;
             if (context.Response.StatusCode != 200)
             { 
                 logger.LogInformation($"Request {context.Request.Path}{context.Request.QueryString} returns status code {context.Response.StatusCode}");

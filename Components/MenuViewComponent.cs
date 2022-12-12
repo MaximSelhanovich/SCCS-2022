@@ -3,7 +3,7 @@ using WEB_053502_Selhanovich.Models;
 
 namespace WEB_053502_Selhanovich.Components
 {
-    public class Menu : ViewComponent
+    public class MenuViewComponent : ViewComponent
     {
         private List<MenuItem> _menuItems = new List<MenuItem>
         {

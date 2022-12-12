@@ -24,7 +24,8 @@ namespace WEB_053502_Selhanovich.Controllers
             if (category == 0) category = null;
             var items = ListViewModel<Dish>.GetModel(Dishes, pageNumber, _pageSize, 
                                                     dish => !category.HasValue || dish.CategoryId == category.Value);
-            
+
+
             if (Request.IsAjaxRequest())
                 return PartialView("_listpartial", items);
             else

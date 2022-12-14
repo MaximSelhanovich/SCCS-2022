@@ -27,6 +27,7 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -34,12 +35,14 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger)
             //IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -137,6 +140,12 @@ namespace WEB_053502_Selhanovich.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    var defaultrole = _roleManager.FindByNameAsync("user").Result;
+                    if (defaultrole != null)
+                    {
+                        await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

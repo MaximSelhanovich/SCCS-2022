@@ -7,12 +7,23 @@ namespace WEB_053502_Selhanovich.Components
     {
         private List<MenuItem> _menuItems = new List<MenuItem>
         {
-            new MenuItem{ Controller="Home", Action="Index", Text="Lab 2"},
-            new MenuItem{ Controller="Dish", Action="Index", Text="Каталог"},
-            new MenuItem{ IsPage=true, Area="Admin", Page="/Index", Text="Администрирование"}
+            new MenuItem{ Controller="Home", Action="Index", Text="Lab"},
+            new MenuItem{ Controller="Dish", Action="Index", Text="Catalog"},
+
         };
+
+        private List<MenuItem> _adminMenuItems = new()
+        {
+            new MenuItem{ Controller="Home", Action="Index", Text="Lab07"},
+            new MenuItem{ Controller="Dish", Action="Index", Text="Catalog"},
+            new MenuItem{ IsPage = true, Area = "Admin", Page = "/Index", Text = "Change"}
+        };
+
         public IViewComponentResult Invoke() {
-            foreach (var item in _menuItems) {
+
+            var checkList = User.IsInRole("admin") ? _adminMenuItems : _menuItems;
+
+            foreach (var item in checkList) {
                 var controller = ViewContext.RouteData.Values["controller"]?.ToString();
                 var area = ViewContext.RouteData.Values["area"]?.ToString();
 
@@ -23,6 +34,7 @@ namespace WEB_053502_Selhanovich.Components
                 }
             }
 
+            if (User != null && User.IsInRole("admin")) return View(_adminMenuItems);
             return View(_menuItems);
         }
     }

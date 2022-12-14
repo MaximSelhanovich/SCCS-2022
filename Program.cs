@@ -33,7 +33,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 builder.Services.AddAuthorization();
-
 builder.Services.AddRazorPages();
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -81,5 +80,5 @@ app.MapControllerRoute(
 
 app.UseLoggin();
 
-//DbInitializer.InitializeData(app);
+DbInitializer.InitializeData(app);
 app.Run();

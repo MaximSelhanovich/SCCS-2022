@@ -7,7 +7,7 @@ namespace WEB_053502_Selhanovich.Models
     {
         private static int _currentPageNumber;
         private static int _totalNumberOfPages;
-        private static IQueryable<T> _currentItems;
+        //private static IQueryable<T> _currentItems;
 
         public int CurrentPageNumber { get { return _currentPageNumber; } }
         public int TotalNumberOfPages { get { return _totalNumberOfPages; } }
@@ -32,7 +32,7 @@ namespace WEB_053502_Selhanovich.Models
             }
             items = items.Skip((current - 1) * itemsPerPage)
                         .Take(itemsPerPage);
-            _currentItems = items;
+            //_currentItems = items;
             return new ListViewModel<T>(items);
         }
     }

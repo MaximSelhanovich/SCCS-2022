@@ -80,7 +80,8 @@ namespace WEB_053502_Selhanovich.Data
                     });
             }
 
-
+            if (applicationDbContext.Users.Any())
+                return;
 
             await roleManager.CreateAsync(new IdentityRole("admin"));
             await roleManager.CreateAsync(new IdentityRole("user"));

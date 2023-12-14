@@ -26,9 +26,9 @@
                 <span asp-validation-for="Dish.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DishCategory.Name" class="control-label"></label>
-                <input asp-for="DishCategory.Name" class="form-control" />
-                <span asp-validation-for="DishCategory.Name" class="text-danger"></span>
+                <label asp-for="Dish.CategoryId" class="control-label"></label>
+                <input asp-for="Dish.CategoryId" class="form-control" />
+                <span asp-validation-for="Dish.CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Dish.Price" class="control-label"></label>
@@ -36,7 +36,7 @@
                 <span asp-validation-for="Dish.Price" class="text-danger"></span>
             </div>
             <div class="custom-file">
-                <input asp-for="FormFile" type="file" class="custom-file-input" onchange="loadFile(event)">
+                <input asp-for="FormFile" type="file" class="custom-file-input" value="~/images/@(Model.Dish.ImageName + '.' + Model.Dish.MimeType)" onchange="loadFile(event)" on>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +28,14 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
         public DishCategory DishCategory { get; set; }
         [BindProperty]
         public IFormFile FormFile { get; set; }
+        private uint curId;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Dishes == null)
             {
                 return NotFound();
             }
+            curId = (uint)id;
 
             var dish =  await _context.Dishes.FirstOrDefaultAsync(m => m.Id == id);
             if (dish == null)
@@ -41,7 +44,6 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
             }
             Dish = dish;
             DishCategory = await _context.DishCategories.FirstOrDefaultAsync(c => dish.CategoryId == c.Id);
-
             return Page();
         }
 
@@ -55,7 +57,8 @@ namespace WEB_053502_Selhanovich.Areas.Admin.Pages
             }
             if (FormFile != null)
             {
-                string extension = Path.GetExtension(FormFile.FileName).Replace(".", string.Empty); ;
+                string extension = Path.GetExtension(FormFile.FileName).Replace(".", string.Empty);
+                Dish.ImageName = curId.ToString();
                 Dish.MimeType = extension;
                 string filePath = Path.Combine(_environment.WebRootPath, "images", Dish.ImageName + '.' + Dish.MimeType);
                 using (Stream fileStream = new FileStream(filePath, FileMode.Create))
